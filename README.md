@@ -7,7 +7,7 @@ Created the game 2048 with Vue and used Firebase to house user's scores.
 </p>
 
 <h2>MineSweeper</h2>
-Created a MineSweeper game with 
+Created a MineSweeper game with vanilla JavaScript and HTML5
 
 <p align="center">
 <img src ="minesweeper.png" width="650">

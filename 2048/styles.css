@@ -1,0 +1,152 @@
+html, body {
+    margin: 0 auto;
+    padding: 0;
+    height:100%;
+    position: relative;
+    overflow: hidden;
+    font-family: 'Inria Sans',sans-serif;
+}
+
+.header{
+    margin: 0 auto;
+    text-align: center;
+    color: white;
+}
+
+#name{
+    position: fixed;
+    size: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.container {
+    position: relative;
+    margin: auto;
+}
+
+#game {
+    position: relative;
+    text-align: center;
+}
+
+#game_info {
+    margin: 0;
+    display: block;
+    color: white;
+}
+
+#grid_container {
+    margin:auto;
+    display: block;
+    width: 35%;
+}
+
+.list-group{
+    margin: auto;
+    width: 50%;
+    max-height: 400px;
+    overflow:scroll;
+}
+
+#grid {
+    display: grid;
+    grid-template-columns: repeat(4, 25%);
+    grid-gap: 7px;
+}
+
+.score{
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    font-size: 25px;
+}
+
+.cells {
+    display: flex;
+    font-size: 30px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    padding: 35%;
+    background: #222831;
+}
+
+.game-over {
+    position: relative;
+    font-size: 25px;
+    margin: 0;
+}
+
+.lost {
+    color: lightcoral;
+}
+
+.won {
+    color: lightgreen;
+}
+
+.ending-score{
+    color:white;
+}
+
+.play-again{
+    color: lightgreen;
+    cursor: pointer;
+}
+
+.view_leaderboards{
+    color: lightskyblue;
+    cursor: pointer;
+}
+
+.cell-0{
+    color:transparent;
+}
+
+.cell-2{
+    background-color: cornflowerblue;
+}
+
+.cell-4{
+    background-color: darksalmon;
+}
+
+.cell-8{
+    background-color: lightgreen;
+}
+
+.cell-16{
+    background-color: aquamarine;
+}
+
+.cell-32{
+    background-color: lightcoral;
+}
+
+.cell-64{
+    background-color: wheat;
+}
+
+.cell-128{
+    background-color: slateblue;
+}
+
+.cell-256{
+    background-color: plum;
+}
+
+.cell-512{
+    background-color: mediumorchid;
+}
+
+.cell-1024{
+    background-color: teal;
+}
+
+.cell-2048{
+    background-color: tomato;
+}
+
+

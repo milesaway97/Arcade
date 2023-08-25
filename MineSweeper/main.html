@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Minesweeper</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="lighten-2 grey center-align">Minesweeper</h1>
+    </div>
+
+    <div id="blocks" class="container center-align blocks"></div>
+
+    <script>
+        var first = 0;
+        var bombLocation = 0;
+        var bombs = 0;
+        var clicks = 0;
+        var hits = 0;
+        var elems = [];
+
+        // create blocks and assign bombs
+        for (var i = 0; i < 264; i++){
+            var block = document.createElement('a');
+            var rand = Math.floor(Math.random() * (10 - 0)) + 0;
+            if (rand == 8 || rand == 2) {
+                block.setAttribute('id','bomb');
+                block.setAttribute('class','bomb');
+                bombs++;
+            }
+            else {
+                var numId = i;
+                block.setAttribute('class', 'free');
+            }
+            elems.push(0);
+            block.innerText = 0;
+            block.setAttribute('class',"waves-effect btn-large grey lighten-1 open");
+            document.getElementById("blocks").appendChild(block);
+        }
+
+        document.querySelectorAll('a').forEach(item => {
+            item.addEventListener('click', event => {
+                item.setAttribute('class',"waves-effect btn-large grey lighten-1 disabled");
+                clicks++;
+                if (first != 0) {
+                    // lose
+                    if (item.getAttribute('id') == "bomb") {
+                        item.setAttribute('class',"waves-effect btn-large grey lighten-1 disabled");
+                        var img = document.createElement('img'); 
+                        img.src = 'bomb.png'; 
+                        img.style.width = '66px';
+                        img.style.height = '30.5px';
+                        item.replaceWith(img);
+
+                        // display all bombs
+                        var div = document.getElementById("blocks"),
+                        divChildren = div.childNodes;
+                        for (var i = 0; i < divChildren.length; i++) {
+                            if (divChildren[i].getAttribute('id') == "bomb") {
+                                divChildren[i].setAttribute('class',"waves-effect btn-large grey lighten-1 disabled");
+                                var img = document.createElement('img'); 
+                                img.src = 'bomb.png'; 
+                                img.style.width = '66px';
+                                img.style.height = '30.5px';
+                                divChildren[i].replaceWith(img);
+                            }
+                        }
+
+                        alert("Game Over");
+                    }
+                    // did not hit bomb, set counter
+                    else {
+                        item.setAttribute('class',"waves-effect btn-large grey lighten-1 disabled");
+                        item.setAttribute('id', 'hit');
+                        hits++;
+
+                        var extras = 1;
+                        var numBombs = 0;
+                        var div = document.getElementById("blocks")
+                        divChildren = div.childNodes;
+                        for (var i = 0; i < divChildren.length; i++) {
+                            if (divChildren[i].getAttribute('id') == 'hit') {
+                                //if (extras == hits) {
+                                    if (i > 18 && i < 244) {
+                                        if (divChildren[i-1].getAttribute('id') == "bomb") {numBombs++;}
+                                        if (divChildren[i+1].getAttribute('id') == "bomb") {numBombs++;}
+                                        if (divChildren[i+18].getAttribute('id') == "bomb") {numBombs++;}
+                                        if (divChildren[i-18].getAttribute('id') == "bomb") {numBombs++;}
+                                        if (divChildren[i+19].getAttribute('id') == "bomb") {numBombs++;}
+                                        if (divChildren[i+17].getAttribute('id') == "bomb") {numBombs++;}
+                                        if (divChildren[i-19].getAttribute('id') == "bomb") {numBombs++;}
+                                        if (divChildren[i-17].getAttribute('id') == "bomb") {numBombs++;}
+                                    }
+                                    else if (i < 18) {
+                                        if (divChildren[i-1].getAttribute('id') == "bomb") {numBombs++;}
+                                        if (divChildren[i+1].getAttribute('id') == "bomb") {numBombs++;}
+                                        if (divChildren[i+18].getAttribute('id') == "bomb") {numBombs++;}
+                                        if (divChildren[i+19].getAttribute('id') == "bomb") {numBombs++;}
+                                        if (divChildren[i+17].getAttribute('id') == "bomb") {numBombs++;}
+                                    }
+                                    else {
+                                        if (divChildren[i-1].getAttribute('id') == "bomb") {numBombs++;}
+                                        if (divChildren[i+1].getAttribute('id') == "bomb") {numBombs++;}
+                                        if (divChildren[i-18].getAttribute('id') == "bomb") {numBombs++;}
+                                        if (divChildren[i-19].getAttribute('id') == "bomb") {numBombs++;}
+                                        if (divChildren[i-17].getAttribute('id') == "bomb") {numBombs++;}
+                                    }
+                                    item.innerText = numBombs;
+                                    numBombs = 0;
+                                //}
+                                extras++;
+                            }
+                        }
+                    }
+                }
+                // did not hit bomb, set counter
+                else {
+                    item.setAttribute('class',"waves-effect btn-large grey lighten-1 disabled");
+                    item.setAttribute('id', 'hit');
+                    hits++;
+
+                    var extras = 1;
+                    var numBombs = 0;
+                    var div = document.getElementById("blocks")
+                    divChildren = div.childNodes;
+                    for (var i = 0; i < divChildren.length; i++) {
+                        if (divChildren[i].getAttribute('id') == 'hit') {
+                            //if (extras == hits) {
+                                if (i > 18 && i < 244) {
+                                        if (divChildren[i-1].getAttribute('id') == "bomb") {numBombs++;}
+                                        if (divChildren[i+1].getAttribute('id') == "bomb") {numBombs++;}
+                                        if (divChildren[i+18].getAttribute('id') == "bomb") {numBombs++;}
+                                        if (divChildren[i-18].getAttribute('id') == "bomb") {numBombs++;}
+                                        if (divChildren[i+19].getAttribute('id') == "bomb") {numBombs++;}
+                                        if (divChildren[i+17].getAttribute('id') == "bomb") {numBombs++;}
+                                        if (divChildren[i-19].getAttribute('id') == "bomb") {numBombs++;}
+                                        if (divChildren[i-17].getAttribute('id') == "bomb") {numBombs++;}
+                                    }
+                                    else if (i < 18) {
+                                        if (divChildren[i-1].getAttribute('id') == "bomb") {numBombs++;}
+                                        if (divChildren[i+1].getAttribute('id') == "bomb") {numBombs++;}
+                                        if (divChildren[i+18].getAttribute('id') == "bomb") {numBombs++;}
+                                        if (divChildren[i+19].getAttribute('id') == "bomb") {numBombs++;}
+                                        if (divChildren[i+17].getAttribute('id') == "bomb") {numBombs++;}
+                                    }
+                                    else {
+                                        if (divChildren[i-1].getAttribute('id') == "bomb") {numBombs++;}
+                                        if (divChildren[i+1].getAttribute('id') == "bomb") {numBombs++;}
+                                        if (divChildren[i-18].getAttribute('id') == "bomb") {numBombs++;}
+                                        if (divChildren[i-19].getAttribute('id') == "bomb") {numBombs++;}
+                                        if (divChildren[i-17].getAttribute('id') == "bomb") {numBombs++;}
+                                    }
+                                item.innerHTML = numBombs;
+                                numBombs = 0;
+                            //}
+                            extras++;
+                        }
+                    }
+                }
+
+                ///*
+                // won check
+                //var win = 0;
+                var div = document.getElementById("blocks"),
+                divChildren = div.childNodes;
+                for (var i = 0; i < divChildren.length; i++) {
+                    if (clicks == 264 - bombs) {
+                        alert("You have won!");
+                    }
+                    else { break; }
+                }
+                //*/
+
+                first = 1;
+            })
+        })
+        
+    </script>
+
+</body>
+</html>
